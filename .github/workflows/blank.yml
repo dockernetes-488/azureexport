@@ -21,8 +21,8 @@ jobs:
       - name: Azure Login
         run: |
           az login --service-principal --username 301cb20d-21f4-4cbc-ad84-dcddb6852f1c --password 87b8Q~LfR1QUpJdbzJx_u3tRhQ3JN7Wm5IzJHcow --tenant c18f87b5-3033-4e25-aa12-5641175188ba
-          az extension add -name resource-graph
-          az extension add -name terraform
+          az extension add --name resource-graph
+          az extension add --name terraform
 
       - name: Run Terraform Export
         run: |
