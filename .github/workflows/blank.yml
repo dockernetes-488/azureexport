@@ -25,11 +25,6 @@ jobs:
           tenant-id: c18f87b5-3033-4e25-aa12-5641175188ba
           subscription-id: f2c8e1cc-c51b-4e81-8ee3-e9cfd3772cc9
           client-secret: 87b8Q~LfR1QUpJdbzJx_u3tRhQ3JN7Wm5IzJHcow
-      - name: Install Terraform Export Tool
-        run: |
-          curl -L https://github.com/Azure/aztfexport/releases/latest/download/aztfexport-linux-amd64 -o aztfexport
-          chmod +x aztfexport
-          sudo mv aztfexport /usr/local/bin/
 
       - name: Run Terraform Export
         run: |
