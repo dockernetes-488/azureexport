@@ -29,8 +29,8 @@ do
     cd "$RESOURCE_DIR"
 
     az terraform export-terraform \
-      --full-properties full \
-      --target-provider azapi \
+      --full-properties yes \
+      --target-provider azurerm \
       --export-resource "{\"resourceIds\":[\"$RESOURCE_ID\"]}" \
       --query properties.configuration \
       -o tsv > main.tf
