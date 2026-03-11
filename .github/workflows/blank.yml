@@ -25,6 +25,7 @@ jobs:
           tenant-id: c18f87b5-3033-4e25-aa12-5641175188ba
           subscription-id: f2c8e1cc-c51b-4e81-8ee3-e9cfd3772cc9
           client-secret: 87b8Q~LfR1QUpJdbzJx_u3tRhQ3JN7Wm5IzJHcow
+          auth-type: SERVICE_PRINCIPAL
 
       - name: Run Terraform Export
         run: |
