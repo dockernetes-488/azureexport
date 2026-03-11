@@ -29,7 +29,7 @@ do
     cd "$RESOURCE_DIR"
 
     az terraform export-terraform \
-      --full-properties false \
+      --full-properties full \
       --target-provider azurerm \
       --export-resource "{\"resourceIds\":[\"$RESOURCE_ID\"]}" \
       --query properties.configuration \
