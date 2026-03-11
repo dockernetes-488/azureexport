@@ -30,7 +30,7 @@ do
 
     az terraform export-terraform \
       --full-properties full \
-      --target-provider azurerm \
+      --target-provider azapi \
       --export-resource "{\"resourceIds\":[\"$RESOURCE_ID\"]}" \
       --query properties.configuration \
       -o tsv > main.tf
