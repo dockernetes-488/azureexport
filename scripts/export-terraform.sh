@@ -31,7 +31,9 @@ do
     az terraform export-terraform \
       --full-properties false \
       --target-provider azurerm \
-      --export-resource "{\"resourceIds\":[\"$RESOURCE_ID\"]}"
+      --export-resource "{\"resourceIds\":[\"$RESOURCE_ID\"]}" \
+      --query properties.configuration \
+      -o tsv > main.tf
 
     cd - > /dev/null
   done
