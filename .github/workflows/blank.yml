@@ -19,13 +19,10 @@ jobs:
 
 
       - name: Azure Login
-        uses: azure/login@v2
-        with:
-          client-id: 301cb20d-21f4-4cbc-ad84-dcddb6852f1c
-          tenant-id: c18f87b5-3033-4e25-aa12-5641175188ba
-          subscription-id: f2c8e1cc-c51b-4e81-8ee3-e9cfd3772cc9
-          client-secret: 87b8Q~LfR1QUpJdbzJx_u3tRhQ3JN7Wm5IzJHcow
-          auth-type: SERVICE_PRINCIPAL
+        run: |
+          az login --service-principal --username 301cb20d-21f4-4cbc-ad84-dcddb6852f1c --password 87b8Q~LfR1QUpJdbzJx_u3tRhQ3JN7Wm5IzJHcow --tenant c18f87b5-3033-4e25-aa12-5641175188ba
+          az extension add -name resource-graph
+          az extension add -name terraform
 
       - name: Run Terraform Export
         run: |
