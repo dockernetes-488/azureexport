@@ -1,0 +1,42 @@
+name: Azure Terraform Export
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"
+
+jobs:
+  terraform-export:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Azure CLI
+        uses: azure/setup-azure-cli@v3
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: 301cb20d-21f4-4cbc-ad84-dcddb6852f1c
+          tenant-id: c18f87b5-3033-4e25-aa12-5641175188ba
+          subscription-id: f2c8e1cc-c51b-4e81-8ee3-e9cfd3772cc9
+          client-secret: 87b8Q~LfR1QUpJdbzJx_u3tRhQ3JN7Wm5IzJHcow
+      - name: Install Terraform Export Tool
+        run: |
+          curl -L https://github.com/Azure/aztfexport/releases/latest/download/aztfexport-linux-amd64 -o aztfexport
+          chmod +x aztfexport
+          sudo mv aztfexport /usr/local/bin/
+
+      - name: Run Terraform Export
+        run: |
+          bash scripts/export-terraform.sh
+
+      - name: Upload Terraform Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-export
+          path: terraform-export
