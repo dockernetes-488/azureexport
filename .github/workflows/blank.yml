@@ -17,7 +17,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Install aztfexport
-        run: curl -sL https://aka.ms/InstallAzureTFExport | bash
+        run: |
+          VERSION=$(curl -s https://api.github.com/repos/Azure/aztfexport/releases/latest | grep tag_name | cut -d '"' -f4)
+      
+          wget https://github.com/Azure/aztfexport/releases/download/$VERSION/aztfexport_linux_amd64.zip
+      
+          unzip aztfexport_linux_amd64.zip
+      
+          chmod +x aztfexport
+      
+          sudo mv aztfexport /usr/local/bin/
+      - name: Verify aztfexport
+        run: |
+          which aztfexport
+          aztfexport --version
 
 
 
