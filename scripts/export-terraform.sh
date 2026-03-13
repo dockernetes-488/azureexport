@@ -1,11 +1,15 @@
 #!/bin/bash
 set -e
 
-echo "Starting Terraform export..."
+echo "Starting Terraform export using aztfexport..."
 
 BASE_DIR="terraform-export"
 mkdir -p "$BASE_DIR"
 
+# Get subscription id
+SUB_ID=$(az account show --query id -o tsv)
+
+# Get all resource groups
 RESOURCE_GROUPS=$(az group list --query "[].name" -o tsv)
 
 for RG in $RESOURCE_GROUPS
@@ -15,28 +19,15 @@ do
   RG_DIR="$BASE_DIR/$RG"
   mkdir -p "$RG_DIR"
 
-  RESOURCE_IDS=$(az resource list --resource-group "$RG" --query "[].id" -o tsv)
+  cd "$RG_DIR"
 
-  for RESOURCE_ID in $RESOURCE_IDS
-  do
-    RESOURCE_NAME=$(basename "$RESOURCE_ID")
+  RG_ID="/subscriptions/$SUB_ID/resourceGroups/$RG"
 
-    echo "Exporting Resource: $RESOURCE_NAME"
+  echo "Exporting resources from $RG_ID..."
 
-    RESOURCE_DIR="$RG_DIR/$RESOURCE_NAME"
-    mkdir -p "$RESOURCE_DIR"
+  yes Y | aztfexport resource-group "$RG_ID" --hcl-only
 
-    cd "$RESOURCE_DIR"
-
-    az terraform export-terraform \
-      --full-properties yes \
-      --target-provider azurerm \
-      --export-resource "{\"resourceIds\":[\"$RESOURCE_ID\"]}" \
-      --query properties.configuration \
-      -o tsv > main.tf
-
-    cd - > /dev/null
-  done
+  cd - > /dev/null
 done
 
-echo "Terraform export completed!"
+echo "Terraform export completed successfully!"
