@@ -18,10 +18,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Install aztfexport
         run: |
-          curl -L https://github.com/Azure/aztfexport/releases/latest/download/aztfexport-linux-amd64.tar.gz -o aztfexport.tar.gz
-          tar -xzf aztfexport.tar.gz
-          chmod +x aztfexport
-          sudo mv aztfexport /usr/local/bin/
+          curl -sL https://aka.ms/InstallAzureTFExport | bash
 
 
 
