@@ -16,6 +16,11 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Install aztfexport
+        run: |
+          curl -L https://github.com/Azure/aztfexport/releases/latest/download/aztfexport-linux-amd64 -o aztfexport
+          chmod +x aztfexport
+          sudo mv aztfexport /usr/local/bin/
 
 
       - name: Azure Login
