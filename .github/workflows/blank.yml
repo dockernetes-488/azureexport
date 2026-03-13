@@ -24,7 +24,7 @@ jobs:
       
           unzip aztfexport_v0.19.0_linux_amd64.zip
       
-          chmod +x aztfexport_v0.19.0_linux_amd64
+          chmod +x aztfexport
       
           sudo mv aztfexport /usr/local/bin/
       - name: Verify aztfexport
