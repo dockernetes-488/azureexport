@@ -6,6 +6,9 @@ echo "Starting Terraform export using aztfexport..."
 BASE_DIR="terraform-export"
 mkdir -p "$BASE_DIR"
 
+# Get subscription id
+SUB_ID=$(az account show --query id -o tsv)
+
 # Get all resource groups
 RESOURCE_GROUPS=$(az group list --query "[].name" -o tsv)
 
@@ -18,11 +21,11 @@ do
 
   cd "$RG_DIR"
 
-  echo "Exporting resources from $RG..."
+  RG_ID="/subscriptions/$SUB_ID/resourceGroups/$RG"
 
-  # Export resource group terraform configuration
-  yes Y | aztfexport resource-group "$RG" \
-      --hcl-only
+  echo "Exporting resources from $RG_ID..."
+
+  yes Y | aztfexport resource-group "$RG_ID" --hcl-only
 
   cd - > /dev/null
 done
