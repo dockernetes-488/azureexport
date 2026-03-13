@@ -22,7 +22,8 @@ jobs:
           tar -xzf aztfexport.tar.gz
           chmod +x aztfexport
           sudo mv aztfexport /usr/local/bin/
-          aztfexport --version
+
+
 
 
       - name: Azure Login
