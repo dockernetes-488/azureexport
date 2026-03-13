@@ -17,8 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Install aztfexport
-        run: |
-          curl -sL https://aka.ms/InstallAzureTFExport | bash
+        run: curl -sL https://aka.ms/InstallAzureTFExport | bash
 
 
 
